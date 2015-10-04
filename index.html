@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <head>
   <meta charset="utf-8">
@@ -7,47 +9,73 @@
   <meta name="viewport" content="width=device-width">
   <!-- <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css"> -->
+
+  
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 </head>
 
-<body>
+<body onload = "getBrainTeaser()">
 
   <p id = "teaser"> </p>
 
   <button onclick =  "showAnswer()"> Answer </button>
 
-  <p id = "answer"> </p> 
+  <p id = "answer"> </p>
+
+  <button onclick = "nextTeaser()"> Next </button> 
 
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
-
-    var BrainTeaser = Parse.Object.extend("BrainTeasers")
-
-    var query = new Parse.Query(BrainTeaser)
+    
 
     var answer = ""
 
-    query.equalTo("Number", 1);
+    var num = 1
 
-    query.find({
+    getBrainTeaser()
 
-      success: function(results) {
+    function nextTeaser() {
 
-        var object = results[0]
+      num = num + 1
 
-        var teaser = object.get('Question')
+      document.getElementById("teaser").innerHTML = ""
 
-        answer = object.get('Answer')
+      document.getElementById("answer").innerHTML = ""
 
-        document.getElementById("teaser").innerHTML = teaser
-      },
+      window.getBrainTeaser();
 
-      error: function(error) {
-        alert("Error: " + error.code + " " + error.message);
-      }
-    });
 
+    }
+
+    function getBrainTeaser() {
+
+     
+
+      var BrainTeaser = Parse.Object.extend("BrainTeasers")
+
+      var query = new Parse.Query(BrainTeaser)
+
+      query.equalTo("Number", num);
+
+      query.find({
+
+        success: function(results) {
+
+          var object = results[0]
+
+          var teaser = object.get('Question')
+
+          answer = object.get('Answer')
+
+          document.getElementById("teaser").innerHTML = teaser
+        },
+
+        error: function(error) {
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
+    }
     function showAnswer() {
 
       document.getElementById("answer").innerHTML = answer
@@ -59,3 +87,5 @@
 </body>
 
 </html>
+
+

@@ -27,25 +27,78 @@
 
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
-    
 
     var answer = ""
 
     var num = 1
 
-    getBrainTeaser()
+    var num2 = 0
+
+    var piece;
+
+    var currentUser = Parse.User.current();
+
+    Parse.User.current().fetch().then(function (user) {
+      //alert(user.get('btval'))
+      num = user.get('btval')
+      //alert(num)
+      replace()
+      
+});
+
+    function replace() {
+
+      num2 = num
+
+      getBrainTeaser()
+
+      //alert(num2)
+    }
+    //alert(num2)
+
+
+//      currentUser.fetch({
+        //success: function(currentUser) {
+        //var num3 = currentUser.get("btval");
+         //alert(comParent);
+         //num = num3 // this one should be right
+          //}
+        //});
+
+    
 
     function nextTeaser() {
 
-      num = num + 1
+      num2 = num2 + 1
 
-      document.getElementById("teaser").innerHTML = ""
+      //alert(num)
 
-      document.getElementById("answer").innerHTML = ""
+      currentUser.set("btval", num2)
 
-      window.getBrainTeaser();
+      //alert("Did this work?")
 
+          currentUser.save(null, {
 
+            success: function(user) {
+
+              //alert("Yes it did.")
+
+              document.getElementById("teaser").innerHTML = ""
+
+              document.getElementById("answer").innerHTML = ""
+
+              window.getBrainTeaser();
+
+            },
+
+            error: function(user,error) {
+
+              alert("Error")
+
+            }
+
+          });
+      
     }
 
     function getBrainTeaser() {
@@ -56,7 +109,7 @@
 
       var query = new Parse.Query(BrainTeaser)
 
-      query.equalTo("Number", num);
+      query.equalTo("Number", num2);
 
       query.find({
 

@@ -1,0 +1,38 @@
+* {
+	font-family:Roboto;
+	margin:0;
+}
+
+#question {
+	background-color:#00BFFF;
+	overflow:hidden;
+	padding: 2%;
+	margin:2%
+}
+
+.buttons {
+	padding:1% 2% 1% 2%;
+	float: left;
+	margin: 2%;
+	background: #FF4000;
+	border-radius: 28px;
+	border-color:#000000;
+  	color: #FFFFFF;
+  	font-size: 19px;
+  	padding: 10px 20px 10px 20px;
+  	text-decoration: none;
+}
+
+#btnanswer {
+	margin-right:10%;
+}	
+#submit {
+	margin-left:25%;
+	margin-right:10%;
+}
+
+#answer {
+	margin-left:40%;
+	height:30%;
+	width:15%;
+}

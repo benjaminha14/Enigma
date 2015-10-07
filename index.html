@@ -46,6 +46,7 @@
     var answer = ""
     var num = 1
     var num2 = 0
+    var score = 0
     var piece;
     var currentUser = Parse.User.current();
     Parse.User.current().fetch().then(function (user) {
@@ -88,7 +89,8 @@
       
     }
     function getBrainTeaser() {
-     
+      
+
       var BrainTeaser = Parse.Object.extend("BrainTeasers")
       var query = new Parse.Query(BrainTeaser)
       query.equalTo("Number", num2);
@@ -97,7 +99,10 @@
           var object = results[0]
           var teaser = object.get('Question')
           answer = object.get('Answer')
+          score = object.get('Score')
+          document.getElementById('score').innerHTML = score
           document.getElementById("teaser").innerHTML = teaser
+
         },
         error: function(error) {
           alert("Error: " + error.code + " " + error.message);

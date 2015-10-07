@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width">
   <!-- <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css"> -->
-
+  <link href="css/hover-min.css" rel="stylesheet">
    <link rel="stylesheet" href="css/main.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
@@ -15,15 +15,23 @@
 
 <body onload = "getBrainTeaser()">
 
+  <div id = "main">
+
   <div id="question">
   <p id = "teaser"> </p>
+  <hr>
   <p id = "answer"> </p>
   </div>
-  <textarea id="answer">Your answer goes here!</textarea>
-  <br>
+  <!--<textarea id="answer">Your answer goes here!</textarea> -->
+  
+
+  <div id= "buttons">
   <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
   <button class = "buttons" id="btnanswer" onclick = "showAnswer()"> Give up? </button>
   <button class = "buttons" id="next" onclick = "nextTeaser()"> Skip </button>
+
+</div>
+</div>
 <!--
   <p id = "teaser"> </p>
 

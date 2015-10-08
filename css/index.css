@@ -1,7 +1,12 @@
 * {
 	font-family:Optima;
 	margin:0;
-	
+}
+a {
+	color:blue;
+}
+a:visited {
+	color:blue;
 }
 *:focus 
 {

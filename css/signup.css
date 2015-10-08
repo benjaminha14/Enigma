@@ -1,0 +1,56 @@
+* {
+	font-family:Optima;
+	margin:0;
+}
+*:focus 
+{
+	outline:none;
+}
+#navbar {
+	/*border: 1px solid black;*/
+	height:9%;
+	width:100%;
+	position:fixed;
+	/*margin-top:-5%;*/
+	z-index:999;
+	background-color:orange;
+}
+
+#navbar p {
+	line-height:350%;
+	width:10%;
+	height:100%;
+	float:left;
+	margin:0;
+	font-weight:normal;
+	text-align:center;
+}
+#navbar p:hover {
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  -webkit-transition-property: color, background-color;
+  transition-property: color, background-color;
+  background-color:yellow;
+}
+
+h1 {
+	text-align:center;
+}
+
+span, input {
+	margin-left:5%;
+	text-align:center;
+	font-weight:bold;
+	width:15%;
+	height:20%;
+	font-family:sans-serif;
+}
+
+a:visited {
+	color:blue;
+}
+
+input {
+	
+	border-radius:25px;
+}

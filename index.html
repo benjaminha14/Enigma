@@ -2,28 +2,30 @@
 <head>
   <meta charset="utf-8">
 
-  <title>My Parse App</title>
-  <meta name="description" content="My Parse App">
+  <title>Enigma</title>
+  <meta name="description" content="Enigma">
   <meta name="viewport" content="width=device-width">
   <!-- <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css"> -->
-  <link href="css/hover-min.css" rel="stylesheet">
-   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="css/hover-min.css" rel="stylesheet"> -->
+   <link rel="stylesheet" href="css/index.css">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 </head>
 
 <body onload = "getBrainTeaser()">
-
+  <div id="navbar">
+  <a href="signup.html"><p>New User!</p></a>
+  <a href="index.html"><p>Home</p></a>
+  </div>
   <div id = "main">
-
   <div id="question">
   <p id = "teaser"> </p>
   <hr>
   <p id = "answer"> </p>
   </div>
   <!--<textarea id="answer">Your answer goes here!</textarea> -->
-  <button class = "buttons" id="score" disabled> 10 </button>
+  <button class = "buttons" id="score"> 10 </button>
 
   <div id= "buttons">
   <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
@@ -44,20 +46,19 @@
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""
-    var num = 1
-    var num2 = 0
-    var score = 0
+    var num = 1;
+    var num2 = 0;
     var piece;
     var currentUser = Parse.User.current();
-    Parse.User.current().fetch().then(function (user) {
+    //document.getElementById("name").innerHTML = "Welcome " + user.get('username');
+    currentUser.fetch().then(function (user) {
       //alert(user.get('btval'))
-      num = user.get('btval')
+      num = user.get('btval');
       //alert(num)
-      replace()
-      
+      replace();
 });
     function replace() {
-      num2 = num
+      num2 = num;
       getBrainTeaser()
       //alert(num2)
     }
@@ -89,8 +90,7 @@
       
     }
     function getBrainTeaser() {
-      
-
+     
       var BrainTeaser = Parse.Object.extend("BrainTeasers")
       var query = new Parse.Query(BrainTeaser)
       query.equalTo("Number", num2);
@@ -99,10 +99,7 @@
           var object = results[0]
           var teaser = object.get('Question')
           answer = object.get('Answer')
-          score = object.get('Score')
-          document.getElementById('score').innerHTML = score
           document.getElementById("teaser").innerHTML = teaser
-
         },
         error: function(error) {
           alert("Error: " + error.code + " " + error.message);

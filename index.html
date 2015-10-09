@@ -1,0 +1,150 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Enigma</title>
+  <meta name="description" content="Enigma">
+  <meta name="viewport" content="width=device-width">
+  <!-- <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="css/hover-min.css" rel="stylesheet"> -->
+   <link rel="stylesheet" href="css/index.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+</head>
+
+<body onload = "getBrainTeaser()">
+  <div id="navbar">
+  <p id="signup" style="color:blue;">New User!</p>
+  <a href="index.html"><p>Home</p></a>
+  </div>
+  <div id = "main">
+  <div id="question">
+  <p id = "teaser"> </p>
+  <hr>
+  <p id = "answer"> </p>
+  </div>
+  <!--<textarea id="answer">Your answer goes here!</textarea> -->
+  <button class = "buttons" id="score"> 10 </button>
+
+  <div id= "buttons">
+  <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
+  <button class = "buttons" id="btnanswer" onclick = "showAnswer()"> Give up? </button>
+  <button class = "buttons" id="next" onclick = "nextTeaser()"> Skip </button>
+
+</div>
+</div>
+<div id="lightbox">
+<form id="myForm">
+  <center><span>Username:</span>
+  <input type="text" id = "uname" name="uname" /></center>
+  <center><span>Password:</span>
+  <input type="text" id = "pass" name="pass" /></center>
+  <center><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:</span>
+  <input type="text" id = "email" name="email" /></center><br><br>
+  <center><input type="button" onclick="signup()" value="Sign Up" id="signup"></center>
+</form>
+</div>
+<script type="text/javascript">
+var opener = document.getElementById('signup');
+opener.onclick = function(){
+    
+    var lightbox = document.getElementById("lightbox"),
+        dimmer = document.createElement("div");
+    
+    dimmer.style.width =  window.innerWidth + 'px';
+    dimmer.style.height = window.innerHeight + 'px';
+    dimmer.className = 'dimmer';
+    
+    dimmer.onclick = function(){
+        document.body.removeChild(this);   
+        lightbox.style.visibility = 'hidden';
+    }
+        
+    document.body.appendChild(dimmer);
+    
+    lightbox.style.visibility = 'visible';
+    lightbox.style.top = window.innerHeight/2 - 50 + 'px';
+    lightbox.style.left = window.innerWidth/2 - 100 + 'px';
+    return false;
+}
+</script>
+
+  <script type="text/javascript">
+    Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
+    var answer = ""
+    var num = 1;
+    var num2 = 0;
+    var piece;
+    var currentUser = Parse.User.current();
+    //document.getElementById("name").innerHTML = "Welcome " + user.get('username');
+    currentUser.fetch().then(function (user) {
+      //alert(user.get('btval'))
+      num = user.get('btval');
+      //alert(num)
+      replace();
+});
+    function replace() {
+      num2 = num;
+      getBrainTeaser()
+      //alert(num2)
+    }
+    //alert(num2)
+//      currentUser.fetch({
+        //success: function(currentUser) {
+        //var num3 = currentUser.get("btval");
+         //alert(comParent);
+         //num = num3 // this one should be right
+          //}
+        //});
+    
+    function nextTeaser() {
+      num2 = num2 + 1
+      //alert(num)
+      currentUser.set("btval", num2)
+      //alert("Did this work?")
+          currentUser.save(null, {
+            success: function(user) {
+              //alert("Yes it did.")
+              document.getElementById("teaser").innerHTML = ""
+              document.getElementById("answer").innerHTML = ""
+              window.getBrainTeaser();
+            },
+            error: function(user,error) {
+              alert("Error")
+            }
+          });
+      
+    }
+    function getBrainTeaser() {
+     
+      var BrainTeaser = Parse.Object.extend("BrainTeasers")
+      var query = new Parse.Query(BrainTeaser)
+      query.equalTo("Number", num2);
+      query.find({
+        success: function(results) {
+          var object = results[0]
+          var teaser = object.get('Question')
+          answer = object.get('Answer')
+          document.getElementById("teaser").innerHTML = teaser
+        },
+        error: function(error) {
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
+    }
+    function showAnswer() {
+      document.getElementById("answer").innerHTML = "<br><b>ANSWER: </b>" + answer
+    }
+
+    function checkAnswer() {
+    var answer = document.getElementById('answer').value;
+    if(answer.indexOf(keyword)) {
+      document.getElementById("score").innerHTML = (parseInt(document.getElementById("score").innerHTML) + 1).toString();
+    }
+  }
+
+  </script>
+</body>
+
+</html>

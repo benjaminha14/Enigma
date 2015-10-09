@@ -1,0 +1,91 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Enigma</title>
+  <meta name="description" content="Enigma">
+  <meta name="viewport" content="width=device-width">
+  <!-- <link rel="stylesheet" href="css/reset.css"> -->
+  <link rel="stylesheet" href="css/signup.css"> 
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+</head>
+
+
+<body>
+<div id="navbar">
+  <a href="signup.html"><p>New User!</p></a>
+  <a href="index.html"><p>Home</p></a>
+  </div>
+  <br><br><br><br>
+ <h1> Create a New User </h1>
+ <form id="myForm">
+  <center><span>Username:</span>
+  <input type="text" id = "uname" name="uname" /></center>
+  <center><span>Password:</span>
+  <input type="text" id = "pass" name="pass" /></center>
+  <center><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:</span>
+  <input type="text" id = "email" name="email" /></center><br><br>
+  <center><input type="button" onclick="signup()" value="Sign Up" id="signup"></center>
+</form>
+<div id="lightbox">
+
+</div>
+<script type="text/javascript">
+    Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
+
+    function signup() {
+
+      
+
+      var username = document.getElementById("uname").value;
+      var password = document.getElementById("pass").value;
+      var email = document.getElementById("email").value;
+
+      var user = new Parse.User();
+
+      user.set("username", username)
+      user.set("password", password)
+      user.set("email", email)
+
+      user.signUp(null, {
+
+        success: function(user) {
+
+          user.set("btval", 1)
+
+          user.save(null, {
+
+            success: function(user) {
+
+              window.location = "index.html"
+
+            },
+
+            error: function(user,error) {
+
+            }
+
+          })
+
+        },
+
+        error: function(user,error) {
+
+          alert("Error: " + error.code + " " + error.message);
+        }
+      })
+      
+
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
+
+

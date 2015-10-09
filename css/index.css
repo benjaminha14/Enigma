@@ -15,8 +15,8 @@ a:visited {
 #main {
 
 	width: 90%;
-	margin: 5%;
-	height:90%;
+	margin: 10% 5% 0% 5%;
+	height:80%;
 	background-color: white;
 	position: relative;
 
@@ -74,6 +74,7 @@ html{
 
 body {
 	height: 95%;
+	overflow:hidden;
 }
 
 
@@ -125,7 +126,7 @@ body {
 	height:9%;
 	width:100%;
 	position:fixed;
-	margin-top:-5%;
+	margin-top:-10%;
 	z-index:999;
 	background-color:orange;
 }

@@ -46,6 +46,7 @@
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""
+    var score;
     var num = 1;
     var num2 = 0;
     var piece;
@@ -99,6 +100,8 @@
           var object = results[0]
           var teaser = object.get('Question')
           answer = object.get('Answer')
+          score = object.get('Score')
+          document.getElementById("score").innerHTML = score
           document.getElementById("teaser").innerHTML = teaser
         },
         error: function(error) {

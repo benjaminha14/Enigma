@@ -5,35 +5,71 @@
   <title>Enigma</title>
   <meta name="description" content="Enigma">
   <meta name="viewport" content="width=device-width">
-  <!-- <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link href="css/hover-min.css" rel="stylesheet"> -->
-   <link rel="stylesheet" href="css/index.css">
+   
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
+  
+ 
+<!-- This is the Bootstrap Docs -->
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+ 
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" href="css/index.css">
+
 </head>
 
 <body onload = "getBrainTeaser()">
-  <div id="navbar">
-  <p id="signup" style="color:blue;">New User!</p>
-  <a href="index.html"><p>Home</p></a>
+  
+  <nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand active" href="#">Enigma</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Page 1</a></li>
+        <li><a href="#">Page 2</a></li>
+        <li><a href="#">Page 3</a></li>
+        <!-- Drop Down Menu -->
+
+        <li class = "dropdown">
+          <a href="#" id = "myAnchor" class="dropdown-toggle" data-toggle="dropdown"> Profile <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Unsolved</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Log Out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </div>
+</nav>
+
+
   <div id = "main">
   <div id="question">
   <p id = "teaser"> </p>
-  <hr>
+  <hr class = "line">
   <p id = "answer"> </p>
   </div>
   <!--<textarea id="answer">Your answer goes here!</textarea> -->
-  <button class = "buttons" id="score"> 10 </button>
 
-  <div id= "buttons">
+  <p class="score"> 10 </p>
+  
+  <div id= "trioB">
   <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
   <button class = "buttons" id="btnanswer" onclick = "showAnswer()"> Give up? </button>
   <button class = "buttons" id="next" onclick = "nextTeaser()"> Skip </button>
 
 </div>
 </div>
+<!--
 <div id="lightbox">
 <form id="myForm">
   <center><span>Username:</span>
@@ -70,9 +106,11 @@ opener.onclick = function(){
 }
 </script>
 
+-->
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""
+    var name;
     var num = 1;
     var num2 = 0;
     var piece;
@@ -81,6 +119,9 @@ opener.onclick = function(){
     currentUser.fetch().then(function (user) {
       //alert(user.get('btval'))
       num = user.get('btval');
+      name = user.get('firstName')
+      name = capitalize(name)
+      
       //alert(num)
       replace();
 });
@@ -89,14 +130,15 @@ opener.onclick = function(){
       getBrainTeaser()
       //alert(num2)
     }
-    //alert(num2)
-//      currentUser.fetch({
-        //success: function(currentUser) {
-        //var num3 = currentUser.get("btval");
-         //alert(comParent);
-         //num = num3 // this one should be right
-          //}
-        //});
+
+    function capitalize(s)
+{
+    return s[0].toUpperCase() + s.slice(1);
+}
+
+    
+    
+    document.getElementById("myAnchor").text = name
     
     function nextTeaser() {
       num2 = num2 + 1

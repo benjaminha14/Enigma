@@ -30,20 +30,21 @@
       <a class="navbar-brand active" href="#">Enigma</a>
     </div>
     <div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
+      <ul class="nav navbar-nav navbar-right" style="margin-right: 3%;">
+        <li><a href="index.htmnl">Home</a></li>
+        <li><a href="#">Create</a></li>
+        
         <!-- Drop Down Menu -->
 
         <li class = "dropdown">
-          <a href="#" id = "myAnchor" class="dropdown-toggle" data-toggle="dropdown"> Profile <span class="caret"></span></a>
+          <a href="#" id = "myAnchor" class="dropdown-toggle" data-toggle="dropdown"> Profile <span class="caret" style="color: white;"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
+            <li><a href="#">Solved</a></li>
             <li><a href="#">Unsolved</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#">Log Out</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="javascript:checkAnswer();">Log Out</a></li>
           </ul>
         </li>
       </ul>
@@ -69,44 +70,7 @@
 
 </div>
 </div>
-<!--
-<div id="lightbox">
-<form id="myForm">
-  <center><span>Username:</span>
-  <input type="text" id = "uname" name="uname" /></center>
-  <center><span>Password:</span>
-  <input type="text" id = "pass" name="pass" /></center>
-  <center><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email:</span>
-  <input type="text" id = "email" name="email" /></center><br><br>
-  <center><input type="button" onclick="signup()" value="Sign Up" id="signup"></center>
-</form>
-</div>
-<script type="text/javascript">
-var opener = document.getElementById('signup');
-opener.onclick = function(){
-    
-    var lightbox = document.getElementById("lightbox"),
-        dimmer = document.createElement("div");
-    
-    dimmer.style.width =  window.innerWidth + 'px';
-    dimmer.style.height = window.innerHeight + 'px';
-    dimmer.className = 'dimmer';
-    
-    dimmer.onclick = function(){
-        document.body.removeChild(this);   
-        lightbox.style.visibility = 'hidden';
-    }
-        
-    document.body.appendChild(dimmer);
-    
-    lightbox.style.visibility = 'visible';
-    lightbox.style.top = window.innerHeight/2 - 50 + 'px';
-    lightbox.style.left = window.innerWidth/2 - 100 + 'px';
-    return false;
-}
-</script>
 
--->
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""
@@ -186,6 +150,7 @@ opener.onclick = function(){
     }
   }
 
+  
   </script>
 </body>
 

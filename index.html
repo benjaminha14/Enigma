@@ -67,7 +67,7 @@
       <div id = "left" style="height:100%; Width: 80%;  margin-top: 4%">
         <div id="question">
           <p id = "teaser"> </p>
-          
+
           <hr class = "line">
           <div id="input1">
           <span class="input input--minoru">
@@ -88,7 +88,7 @@
   
   <div id="right" style="height:100%; Width: 20%;  position: absolute; top:0; right: 0">
     <div id = "scoreBox" style="height: 40%; width: 100%;  position: absolute">
-      <p class="score"> 10 </p>
+      <p class="score" id = "score"> 0 </p>
     </div>
     <div id= "trioB">
       <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
@@ -101,6 +101,7 @@
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""
     var name;
+    var keyterms = ["hello"]
     var num = 1;
     var num2 = 0;
     var piece;
@@ -158,7 +159,10 @@
           var object = results[0]
           var teaser = object.get('Question')
           answer = object.get('Answer')
+          score = object.get('Score')
+          keyterms = object.get("keyTerms")
           document.getElementById("teaser").innerHTML = teaser
+          document.getElementById("score").innerHTML = score
         },
         error: function(error) {
           alert("Error: " + error.code + " " + error.message);
@@ -168,13 +172,30 @@
     function showAnswer() {
       document.getElementById("input1").style.display = "none";
       document.getElementById("answer").innerHTML = "<br><b>ANSWER: </b>" + answer
-      document.getElementById("answer").style.display = "block"
+      document.getElementById("answer").style.display = "block";
+      document.getElementById("answer").style.backgroundColor = "#FF6666";
     }
 
     function checkAnswer() {
-    var answer = document.getElementById('answer').value;
-    if(answer.indexOf(keyword)) {
-      document.getElementById("score").innerHTML = (parseInt(document.getElementById("score").innerHTML) + 1).toString();
+    
+      var val = document.getElementById('input-13').value;
+      val = val.toLowerCase();
+      var punctuationless = val.replace(/[.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+      var arr = punctuationless.match(/\S+/g);
+      for(i = 0; i < arr.length; i++) {
+        for (key = 0; key < keyterms.length; key++) {
+          var val1 = keyterms[key].toLowerCase();
+          var val2 = arr[i];
+          if (val1 == val2) {
+            document.getElementById("input1").style.display = "none";
+            document.getElementById("answer").style.display = "block"
+            document.getElementById("answer").innerHTML = "You got the right answer!"
+            document.getElementById("answer").style.backgroundColor = "#A3FFA3";
+
+            }
+          
+
+        }
     }
   }
 

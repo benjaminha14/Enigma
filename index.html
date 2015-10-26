@@ -37,6 +37,7 @@
         <!-- Drop Down Menu -->
 
         <li class = "dropdown">
+
           <a href="#" id = "myAnchor" class="dropdown-toggle" data-toggle="dropdown"> Profile <span class="caret" style="color: white;"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
@@ -53,24 +54,36 @@
 </nav>
 
 
-  <div id = "main">
-  <div id="question">
-  <p id = "teaser"> </p>
-  <hr class = "line">
-  <p id = "answer"> </p>
-  </div>
+<!-- Start of main body -->
+
+  <div id="container" style="height: 100%;">
+
+    <!-- Inside First Level -->
+    <div id = "main">
+      <div id = "left" style="height:100%; Width: 80%;  margin-top: 4%">
+        <div id="question">
+          <p id = "teaser"> </p>
+          <hr class = "line">
+          <p id = "answer"> </p>
+        </div>
+      </div>
+
+  <!-- Left Side of screen -->
   <!--<textarea id="answer">Your answer goes here!</textarea> -->
 
-  <p class="score"> 10 </p>
   
-  <div id= "trioB">
-  <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
-  <button class = "buttons" id="btnanswer" onclick = "showAnswer()"> Give up? </button>
-  <button class = "buttons" id="next" onclick = "nextTeaser()"> Skip </button>
-
+  
+  <div id="right" style="height:100%; Width: 20%;  position: absolute; top:0; right: 0">
+    <div id = "scoreBox" style="height: 40%; width: 100%;  position: absolute">
+      <p class="score"> 10 </p>
+    </div>
+    <div id= "trioB">
+      <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
+      <button class = "buttons" id="btnanswer" onclick = "showAnswer()"> Give up? </button>
+      <button class = "buttons" id="next" onclick = "nextTeaser()"> Skip </button>
+    </div>
+  </div>
 </div>
-</div>
-
   <script type="text/javascript">
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""

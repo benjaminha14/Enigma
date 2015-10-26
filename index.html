@@ -20,6 +20,10 @@
 
   <link rel="stylesheet" href="css/index.css">
 
+
+  <link rel="stylesheet" type="text/css" href="css/set1.css" />
+  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+
 </head>
 
 <body onload = "getBrainTeaser()">
@@ -63,7 +67,16 @@
       <div id = "left" style="height:100%; Width: 80%;  margin-top: 4%">
         <div id="question">
           <p id = "teaser"> </p>
+          
           <hr class = "line">
+          <div id="input1">
+          <span class="input input--minoru">
+          <textarea placeholder="Enter your answer..." style="resize:none;font-weight: normal; font-family: optima; font-size: 20px; color: black; border-radius: 25px;" class="input__field input__field--minoru" type="text" id="input-13"></textarea> 
+          <label class="input__label input__label--minoru" for="input-13">
+            
+          </label>
+        </span>
+      </div>
           <p id = "answer"> </p>
         </div>
       </div>
@@ -136,7 +149,7 @@
       
     }
     function getBrainTeaser() {
-     
+
       var BrainTeaser = Parse.Object.extend("BrainTeasers")
       var query = new Parse.Query(BrainTeaser)
       query.equalTo("Number", num2);
@@ -153,7 +166,9 @@
       });
     }
     function showAnswer() {
+      document.getElementById("input1").style.display = "none";
       document.getElementById("answer").innerHTML = "<br><b>ANSWER: </b>" + answer
+      document.getElementById("answer").style.display = "block"
     }
 
     function checkAnswer() {

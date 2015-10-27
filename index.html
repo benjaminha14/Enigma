@@ -15,8 +15,12 @@
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
- 
+
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="http://github.hubspot.com/odometer/themes/odometer-theme-default.css" />
+<script src="http://github.hubspot.com/odometer/odometer.js"></script>
+  
 
   <link rel="stylesheet" href="css/index.css">
 
@@ -88,7 +92,7 @@
   
   <div id="right" style="height:100%; Width: 20%;  position: absolute; top:0; right: 0">
     <div id = "scoreBox" style="height: 40%; width: 100%;  position: absolute">
-      <p class="score" id = "score"> 0 </p>
+      <p class="odometer" id = "score"> 0 </p>
     </div>
     <div id= "trioB">
       <button class = "buttons" id="submit" onclick = "checkAnswer()"> Submit </button>
@@ -101,6 +105,9 @@
     Parse.initialize("CnC61CI3beai2RyvnxBrz6omXBuPocQF79eua2Vz", "XH3STCvM2oQFPS1FLqguD7xRMS8Dk5tVKoZ3CwnC");
     var answer = ""
     var name;
+    var finalScore = 0;
+    var wrong = 0
+    var scoredec = 0
     var keyterms = ["hello"]
     var num = 1;
     var num2 = 0;
@@ -150,6 +157,7 @@
       
     }
     function getBrainTeaser() {
+       document.getElementById("input1").style.display = "block";
 
       var BrainTeaser = Parse.Object.extend("BrainTeasers")
       var query = new Parse.Query(BrainTeaser)
@@ -160,6 +168,8 @@
           var teaser = object.get('Question')
           answer = object.get('Answer')
           score = object.get('Score')
+          finalscore = score;
+          scoredec = (score / 10) * 2
           keyterms = object.get("keyTerms")
           document.getElementById("teaser").innerHTML = teaser
           document.getElementById("score").innerHTML = score
@@ -171,34 +181,59 @@
     }
     function showAnswer() {
       document.getElementById("input1").style.display = "none";
-      document.getElementById("answer").innerHTML = "<br><b>ANSWER: </b>" + answer
-      document.getElementById("answer").style.display = "block";
-      document.getElementById("answer").style.backgroundColor = "#FF6666";
+
+      setOutput("<br><b>ANSWER: </b>" + answer, "#FF6666")
+      
     }
 
     function checkAnswer() {
-    
+    var correct = false
       var val = document.getElementById('input-13').value;
       val = val.toLowerCase();
       var punctuationless = val.replace(/[.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
       var arr = punctuationless.match(/\S+/g);
+      if (keyterms[0] == "Complicated") {
+        correct = true;
+        setOutput("Thanks for submitting! We'll verify your answer shortly.", "#FFFF66")
+        document.getElementById("answer").innerHTML = "Thanks for submitting! We'll verify your answer shortly."
+        
+        document.getElementById("input1").style.display = "none";
+      }
       for(i = 0; i < arr.length; i++) {
         for (key = 0; key < keyterms.length; key++) {
           var val1 = keyterms[key].toLowerCase();
           var val2 = arr[i];
           if (val1 == val2) {
+            correct = true
             document.getElementById("input1").style.display = "none";
-            document.getElementById("answer").style.display = "block"
-            document.getElementById("answer").innerHTML = "You got the right answer!"
-            document.getElementById("answer").style.backgroundColor = "#A3FFA3";
+            setOutput("You got the right answer!", "#A3FFA3")
+            
 
             }
           
 
         }
     }
+
+    if (correct != true) {
+            setOutput("Incorrect! Please try again.", "#FF6666")
+            if (score == (finalscore * 6) / 10) {
+               document.getElementById("score").innerHTML = score
+            }
+            else {
+            score = score - scoredec
+            document.getElementById("score").innerHTML = score
+          }
+            
+    }
   }
 
+  function setOutput(text,color) {
+    document.getElementById("answer").style.display = "block"
+    document.getElementById("answer").innerHTML = text;
+    document.getElementById("answer").style.backgroundColor = color;
+
+  }
   
   </script>
 </body>
